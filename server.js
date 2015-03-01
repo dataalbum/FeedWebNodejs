@@ -10,7 +10,7 @@ var async = require('async'),
 
 
 //mongoose.connect('mongodb://localhost/rrsdb');
-mongoose.connect('mongodb://fsdbuser:mongolabp0rject@ds062797.mongolab.com:62797/feedstore')
+mongoose.connect('mongodb://fsdbuser:***p0rject@ds062797.mongolab.com:62797/feedstore')
 
 var feedSchema = new Schema({
     _id: String
@@ -75,6 +75,13 @@ var job = new CronJob({
 
             });
         });
+        
+    var xmlHttp = null;
+    var url = "http://feedwebnodejs-dataalbum.rhcloud.com";
+    xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET",url , false );
+    xmlHttp.send( null );
+    return xmlHttp.responseText;
 
     },
     start: true
@@ -87,4 +94,4 @@ mongoose.connection.on('open', function (err, db) {
 http.createServer(function (req, res) {
     res.writeHead(200, { 'Content-Type': 'text/plain' });
     res.end('Hello World\n');
-}).listen(port);
+}).listen(process.env.OPENSHIFT_NODEJS_PORT || 3000);
