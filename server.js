@@ -81,7 +81,7 @@ var job = new CronJob({
     xmlHttp = new XMLHttpRequest();
     xmlHttp.open( "GET",url , false );
     xmlHttp.send( null );
-    return xmlHttp.responseText;
+    console.log(xmlHttp.responseText);
 
     },
     start: true
