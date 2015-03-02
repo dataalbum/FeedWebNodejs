@@ -1,5 +1,6 @@
 ﻿var http = require('http');
-var port = process.env.port || 5000;
+//var port = process.env.port || 5000;
+var port = process.env.OPENSHIFT_NODEJS_PORT || 3000
 var async = require('async'),
     CronJob = require('cron').CronJob,
     mongoose = require('mongoose'),
@@ -7,10 +8,12 @@ var async = require('async'),
     FeedParser = require('feedparser'),
     request = require('request'),
     logtimestamp = require('log-timestamp');
-
+var url = "http://feedwebnodejs-dataalbum.rhcloud.com";
+//var url = "http://localhost:1337";
+        
 
 //mongoose.connect('mongodb://localhost/rrsdb');
-mongoose.connect('mongodb://fsdbuser:***p0rject@ds062797.mongolab.com:62797/feedstore')
+mongoose.connect('mongodb://fsdbuser:mongolabp0rject@ds062797.mongolab.com:62797/feedstore')
 
 var feedSchema = new Schema({
     _id: String
@@ -75,14 +78,11 @@ var job = new CronJob({
 
             });
         });
-        
-    var xmlHttp = null;
-    var url = "http://feedwebnodejs-dataalbum.rhcloud.com";
-    xmlHttp = new XMLHttpRequest();
-    xmlHttp.open( "GET",url , false );
-    xmlHttp.send( null );
-    console.log(xmlHttp.responseText);
-
+        http.get(url, function (selfres) {
+            console.log("got response: " + selfres.statusCode);
+        }).on('error', function (e) {
+            console.log("got error: " + e.message);
+        });
     },
     start: true
 });
@@ -94,4 +94,4 @@ mongoose.connection.on('open', function (err, db) {
 http.createServer(function (req, res) {
     res.writeHead(200, { 'Content-Type': 'text/plain' });
     res.end('Hello World\n');
-}).listen(process.env.OPENSHIFT_NODEJS_PORT || 3000);
+}).listen(port);
