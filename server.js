@@ -1,6 +1,7 @@
 ﻿var http = require('http');
 //var port = process.env.port || 5000;
-var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
+var port = process.env.OPENSHIFT_NODEJS_PORT || 3000,
+    ip = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1";
 var async = require('async'),
     CronJob = require('cron').CronJob,
     mongoose = require('mongoose'),
@@ -94,4 +95,4 @@ mongoose.connection.on('open', function (err, db) {
 http.createServer(function (req, res) {
     res.writeHead(200, { 'Content-Type': 'text/plain' });
     res.end('Hello World\n');
-}).listen(port);
+}).listen(port,ip);
