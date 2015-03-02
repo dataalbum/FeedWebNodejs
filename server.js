@@ -1,6 +1,6 @@
 ﻿var http = require('http');
 //var port = process.env.port || 5000;
-var port = process.env.OPENSHIFT_NODEJS_PORT || 3000
+var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
 var async = require('async'),
     CronJob = require('cron').CronJob,
     mongoose = require('mongoose'),
