@@ -1,5 +1,5 @@
 ﻿var http = require('http');
-var port = process.env.port || 3000;
+var port = process.env.port || 5000; //local and Heroku port
 //var port = process.env.OPENSHIFT_NODEJS_PORT || 3000,
 //    ip = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1";
 var async = require('async'),
