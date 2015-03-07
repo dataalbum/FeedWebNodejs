@@ -14,13 +14,13 @@ var async = require('async'),
     FeedParser = require('feedparser'),
     request = require('request'),
     logtimestamp = require('log-timestamp');
-var url = "http://feedwebnodejs.herokuapp.com";
+var url = "http://feedwebnodejsheroku.herokuapp.com";
 //var url = "http://feedwebnodejs-dataalbum.rhcloud.com";
 //var url = "http://localhost:1337";
         
 
 //mongoose.connect('mongodb://localhost/rrsdb');
-mongoose.connect('mongodb://fsdbuser:*****p0rject@ds062797.mongolab.com:62797/feedstore')
+mongoose.connect('mongodb://fsdbuser:mongolabp0rject@ds062797.mongolab.com:62797/feedstore')
 
 var feedSchema = new Schema({
     _id: String
