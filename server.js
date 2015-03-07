@@ -1,4 +1,9 @@
-﻿var http = require('http');
+﻿/*
+ * Feeder Openshift version
+ * RSS source: ampparit.com
+ * Keep alive: Feeder Heroku version
+ */
+var http = require('http');
 //var port = process.env.PORT || 5000; //local and Heroku PORT (with upper cases)
 var port = process.env.OPENSHIFT_NODEJS_PORT || 3000,
     ip = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1";
@@ -15,7 +20,7 @@ var url = "http://feedwebnodejs.herokuapp.com";
         
 
 //mongoose.connect('mongodb://localhost/rrsdb');
-mongoose.connect('mongodb://fsdbuser:mongolabp0rject@ds062797.mongolab.com:62797/feedstore')
+mongoose.connect('mongodb://fsdbuser:*****p0rject@ds062797.mongolab.com:62797/feedstore')
 
 var feedSchema = new Schema({
     _id: String
@@ -23,9 +28,9 @@ var feedSchema = new Schema({
 
 var Feed = mongoose.model('Feed', feedSchema);
 
-//run job starting 3 min past full hour and then every 5 mins. Eg. 12:03, 12:08, 12:14,..
+//run job starting at full hour and then every 5 mins.
 var job = new CronJob({
-    cronTime: '0 3-59/5 * * * *',
+    cronTime: '0 0-59/5 * * * *',
     
     onTick: function () {
         
