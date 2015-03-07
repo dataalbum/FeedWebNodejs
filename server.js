@@ -1,7 +1,7 @@
 ﻿var http = require('http');
-var port = process.env.PORT || 5000; //local and Heroku PORT (with upper cases)
-//var port = process.env.OPENSHIFT_NODEJS_PORT || 3000,
-//    ip = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1";
+//var port = process.env.PORT || 5000; //local and Heroku PORT (with upper cases)
+var port = process.env.OPENSHIFT_NODEJS_PORT || 3000,
+    ip = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1";
 var async = require('async'),
     CronJob = require('cron').CronJob,
     mongoose = require('mongoose'),
@@ -9,12 +9,13 @@ var async = require('async'),
     FeedParser = require('feedparser'),
     request = require('request'),
     logtimestamp = require('log-timestamp');
-var url = "http://feedwebnodejs-dataalbum.rhcloud.com";
+var url = "https://feedwebnodejs.herokuapp.com";
+//var url = "http://feedwebnodejs-dataalbum.rhcloud.com";
 //var url = "http://localhost:1337";
         
 
 //mongoose.connect('mongodb://localhost/rrsdb');
-mongoose.connect('mongodb://fsdbuser:*****p0rject@ds062797.mongolab.com:62797/feedstore')
+mongoose.connect('mongodb://fsdbuser:mongolabp0rject@ds062797.mongolab.com:62797/feedstore')
 
 var feedSchema = new Schema({
     _id: String
@@ -97,5 +98,5 @@ mongoose.connection.on('open', function (err, db) {
 http.createServer(function (req, res) {
     res.writeHead(200, { 'Content-Type': 'text/plain' });
     res.end('Hello World\n');
-})//.listen(port,ip);
-.listen(port);
+}).listen(port,ip);
+//.listen(port);
