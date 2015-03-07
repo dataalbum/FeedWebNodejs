@@ -9,7 +9,7 @@ var async = require('async'),
     FeedParser = require('feedparser'),
     request = require('request'),
     logtimestamp = require('log-timestamp');
-var url = "https://feedwebnodejs.herokuapp.com";
+var url = "http://feedwebnodejs.herokuapp.com";
 //var url = "http://feedwebnodejs-dataalbum.rhcloud.com";
 //var url = "http://localhost:1337";
         
